@@ -1,0 +1,7 @@
+Scheletul aplicatiei:
+-pagina de login
+-pagina de blog in sine{
+    -pagina principala unde se vizioneaza postarile (home)
+    -pagina de creare
+    -pagina de update/delete a postarilor
+}

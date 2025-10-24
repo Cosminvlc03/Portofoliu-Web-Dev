@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>Web Blog</title>
+</head>
+<body>
+    <div class="login_title">
+        <h1> Welcome, blogger! Please, introduce yourself.</h1>
+    </div>
+    <div class="login_form">
+        <form action="/submit" method="POST">
+            <label class="login_label" for="name">Name:</label><br>
+            <input class="login_input" type="text" id="name" name="name"><br>
+            <label class="login_label" for="password">Password:</label><br>
+            <input class="login_input" type="password" id="password" name="password" required><br>
+            <input class="login_input" id="login_submit" type="submit" value="Login">
+        </form>
+    </div>
+<%- include("partials/footer.ejs") %>
