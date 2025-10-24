@@ -1,0 +1,348 @@
+
+.body1{
+    background-image: url('../misc/Serene Countryside Path and Hills.png');
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.mainTitle{
+    width: 800px;
+    height: 100px;
+    flex-shrink: 0;
+    color: #052132;
+    text-align: center;
+    font-family: Inter;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 0;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.subTitle{
+    width: 600px;
+    flex-shrink: 0;
+    color: #052132;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.inputWithButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: center;
+    border-radius: 16px;
+    height: 80px;
+    width: 540px;
+    border: none;
+}
+
+.cityForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#cityInput{
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 16px 0px 0px 0px;
+    background: rgba(10, 14, 52, 0.80);
+    text-align: start;
+    font-size: larger;
+    border: none;
+    color: white;
+    padding-left: 12px;
+    outline: none;
+}
+
+#cityInput::placeholder{
+    color: gray;
+}
+
+
+#clearCity{
+    display: flex;
+    width: 48px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 16px 0px 0px;
+    background: rgba(10, 14, 52, 0.80); 
+    border: none;
+}
+
+.helpingText{
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 0px 0px 16px 16px;
+    background: rgba(10, 14, 52, 0.80);
+    text-align: center;
+    font-size: larger;
+    border: none;
+    color: gray;
+    margin: 0;
+}
+
+.submitDiv{
+    width: 540px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitButton{
+    width: 200px;
+    height: 60px;
+    margin-top: 20px;
+    border-radius: 16px;
+    background: rgba(10, 14, 52, 0.80);
+    color: white;
+    font-size: larger;
+    border: none;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+.submitButton:hover{
+    background: rgba(10, 14, 52, 1);
+}
+
+#upperBorder{
+    width: 100%;
+    height: 15vh;
+    flex-shrink: 0;
+    background: rgba(10, 14, 52, 0.50);
+}
+
+#lowerBorder{
+    width: 100%;
+    height: 20vh;
+    flex-shrink: 0;
+    background: rgba(10, 14, 52, 0.50);
+    margin-top: 110px;
+}
+
+#helpBtn{
+    display: flex;
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: rgba(31, 135, 34, 0.80);
+    border: none;
+    gap: 8px;
+    padding: 10px 16px;
+    color: var(--Schemes-On-Primary, #FFF);
+    font-family: var(--Static-Label-Large-Font, Roboto);
+    font-size: var(--Static-Label-Large-Size, 14px);
+    font-style: normal;
+    font-weight: 500;
+    line-height: var(--Static-Label-Large-Line-Height, 20px);
+    letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
+    cursor: pointer;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+
+}
+
+#helpBtn:hover{
+    background: rgba(31, 135, 34, 1);
+}
+
+.hidden{
+    display: none;
+}
+
+#helpPanel{
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    transform: translate(-50%, -20%);
+    background: rgba(10, 14, 52, 0.80);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 360px;
+    z-index: 1000;
+    color: gray;
+    animation: drop-left 0.5s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#closeHelp{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#closeHelp:hover{
+    opacity: 0.7;
+}
+
+.body2{
+    background-image: url('../misc/Lakeside\ Serenity\ on\ a\ Sunny\ Day.png');
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.centerdContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - 480px);
+    height: 100vh;
+}
+
+.weatherContainer{
+    width: 500px;
+    height: 500px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(2, 5, 27, 0.40);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.cityName{
+    width: 400px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(2, 5, 27, 0.60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: drop 2s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#cityText{
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    width: 300px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.weatherInfo{
+    width: 250px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(2, 5, 27, 0.60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: drop 2s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#weatherText{
+    width: 300px;
+    height: 50px;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#backBtn{
+    display: flex;
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: rgba(2, 5, 27, 0.60);
+    color: var(--M3-sys-light-on-primary, var(--Schemes-On-Primary, #FFF));
+    font-family: var(--Static-Label-Large-Font, Roboto);
+    font-size: var(--Static-Label-Large-Size, 14px);
+    font-style: normal;
+    font-weight: 500;
+    line-height: var(--Static-Label-Large-Line-Height, 20px);
+    letter-spacing: var(--Static-Label-Large-Tracking, 0.1px);
+    border: none;
+    cursor: pointer;
+    animation: drop 2s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#backBtn:hover{
+    background: rgba(2, 5, 27, 0.80);
+}
+
+#backHomeBtn{
+    width: 20px;
+    height: 20px;
+}
+
+#leftBorder{
+    width: 240px;
+    height: 100vh;
+    flex-shrink: 0;
+    background: rgba(2, 5, 27, 0.40);
+}
+
+#rightBorder{
+    width: 240px;
+    height: 100vh;
+    flex-shrink: 0;
+    background: rgba(2, 5, 27, 0.40);
+}
+
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes drop-left{
+    0% {
+        opacity: 0;
+        transform: translateY(-60px, -40px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0, 0, 0);
+    }
+}

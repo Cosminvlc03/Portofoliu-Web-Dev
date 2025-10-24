@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>MyCityWeather</title>
+</head>
+<body class="body1">
+    <div class="borderContainer" id="upperBorder">
+        <button id="helpBtn" aria-label="Help"><img src="../misc/Icon.svg" alt="help_icon" id="svgHelpIcon">Help</button>
+        <div id="helpPanel" class="hidden" role="region" aria-labelledby="helpBtn">
+            <h2>How to use MyCityWeather</h2>
+            <p>Enter the name of your city in the input field and click "Get Weather" to see the latest weather updates for your location.</p>
+            <button id="closeHelp" ><img src="../misc/Trailing icon.svg" alt="closeHelp" id="closePanelBtn"></button>
+        </div>
+    </div>
+    <h1 class="mainTitle">Welcome to MyCityWeather!</h1>
+    <h2 class="subTitle">Get the latest weather updates for your city</h2>
+    <div class="cityForm">
+        <form id="weatherForm" action="/submit" method="POST">
+            <div class="inputWithButton">
+                <input type="text" id="cityInput" name="city" placeholder="City name">
+                <button type="button" class="inputClear" id="clearCity" aria-label="Clear city"><img src="../misc/Trailing icon.svg" alt="clear_city" id="svgCityClear"></button>
+            </div>
+            <p class="helpingText">Input your city's name</p>
+            <div class="submitDiv">
+                <input type="submit" class="submitButton" value="Get Weather">
+            </div>
+        </form>
+    </div>
+    <div class="borderContainer" id="lowerBorder"></div>
+</body>
+<script src="/script.js"></script>
+<script src="../index.js"></script>
+</html>
