@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>Modify</title>
+</head>
+<body>
+    <h1>What would you like to do?</h1>
+    <h2>Update a post</h2>
+    <form action="/update_post" method="post">
+        <label for="title_update">Post Title</label><br>
+        <input type="text" id="update_title" name="update_title"><br>
+        <label for="text_update">Content</label><br>
+        <input type="text" id="update_text" name="update_text"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <h2>Delete a post</h2>
+    <form action="/delete_post" method="post">
+        <label for="title_delete">Post Title</label><br>
+        <input type="text" id="delete_title" name="delete_title"><br>
+        <input type="submit" value="Submit">
+    </form>
+<%- include("partials/footer.ejs") %>
