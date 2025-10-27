@@ -257,13 +257,14 @@
 }
 
 .weatherInfo{
-    width: 250px;
+    width: 400px;
     height: 100px;
     flex-shrink: 0;
     border-radius: 30px;
     background: rgba(2, 5, 27, 0.60);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     animation: drop 2s cubic-bezier(.22, .9, .26, 1) both;
 }
