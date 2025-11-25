@@ -1,0 +1,206 @@
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    background: #020315;
+}
+
+.border{
+    width: 200px;
+    height: 100vh;
+    background: rgba(92, 0, 31, 0.80);
+    box-shadow: 0 4px 6px 5px rgba(0, 0, 0, 0.20) inset;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.mainTitle{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 68px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+    margin: 0;
+}
+
+.mainSection{
+    width: 450px;
+    height: 550px;
+    border-radius: 40px;
+    background: rgba(92, 0, 31, 0.80);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+#loginForm{
+    width: 450px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#usernameInput{
+    width: 300px;
+    height: 80px;
+    border-radius: 40px;
+    background: rgba(195, 197, 215, 0.80);
+    outline: none;
+    border: none;
+    color: rgba(0, 0, 0, 0.60);
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 15px;
+}
+
+#usernameInput:focus{
+    background: rgba(195, 197, 215, 0.60);
+    box-shadow: 0 0 8px rgba(195, 197, 215, 0.80);
+}
+
+#usernameInput:-webkit-autofill{
+    box-shadow: 0 0 8px rgba(195, 197, 215, 0.60)!important;
+    transition: background-color 9999s ease-in-out 0s;
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.removeSpace{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#passwordInput{
+    width: 300px;
+    height: 80px;
+    border-radius: 40px;
+    background: rgba(195, 197, 215, 0.80);
+    outline: none;
+    border: none;
+    color: rgba(0, 0, 0, 0.60);
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 15px;
+}
+
+#passwordInput:focus{
+    background: rgba(195, 197, 215, 0.60);
+    box-shadow: 0 0 8px rgba(195, 197, 215, 0.80);
+    
+}
+
+#passwordInput:-webkit-autofill{
+    box-shadow: 0 0 8px rgba(195, 197, 215, 0.60)!important;
+    transition: background-color 9999s ease-in-out 0s;
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#forgottenPasswordButton{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#forgottenPasswordButton:hover{
+    text-decoration: underline;
+}
+
+#loginButton{
+    width: 150px;
+    height: 50px;
+    border-radius: 30px;
+    background: #020315;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+#loginButton:hover{
+    background:rgba(2, 3, 21, .6);
+}
+
+.signSection{
+    width: 450px;
+    height: 150px;
+    border-radius: 40px;
+    background: rgba(92, 0, 31, 0.80);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.newUser{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#signupButton{
+    width: 150px;
+    height: 50px;
+    border-radius: 30px;
+    background: #020315;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+#signupButton:hover{
+    background:rgba(2, 3, 21, .6);
+}
+
+.error_message{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

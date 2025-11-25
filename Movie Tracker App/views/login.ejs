@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>MyMovieTracker</title>
+</head>
+<body>
+    <div class="border" id="leftBorder"></div>
+    <div class="center">
+        <% if (typeof error !== "undefined") { %>
+            <div class="error_message"><%= error %></div>
+        <% } %>
+        <h1 class="mainTitle"> MyMovieTracker</h1>
+        <div class="mainSection">
+            <form id="loginForm" method="post">
+                <input type="text" id="usernameInput" name="username" placeholder="Username">
+                <div class="removeSpace"> 
+                    <input type="password" id="passwordInput" name="password" placeholder="Password">
+                    <input type="submit" id="forgottenPasswordButton" value="Forgot Password?" formaction="/forgotten">
+                </div>
+                <input type="submit" id="loginButton" value="Log in" formaction="/login">
+            </form>   
+            <div class="signSection">
+                <h3 class="newUser">New user?</h3>
+                <form id="signupForm" action="/signup" method="post">
+                    <input type="submit" id="signupButton" value="Sign up">
+                </form>
+            </div>  
+        </div>
+    </div> 
+    <div class="border" id="rightBorder"></div>
+</body>
+<script src="../index.js"></script>
+</html>
