@@ -40,7 +40,8 @@ app.get("/weather", async(req, res) => {
     const coordResponse = await axios.get(`${cityCoordsAPI}search`, {
       params: {
         q: city,
-        limit: 1
+        limit: 1,
+        api_key: apiKey
       }
     });
     const { lat, lon } = coordResponse.data[0];
@@ -49,8 +50,8 @@ app.get("/weather", async(req, res) => {
         latitude: lat,
         longitude: lon,
         current_weather: true,
-        hourly: 'precipitation_probability'
-        
+        hourly: 'precipitation_probability',
+        api_key:apiKey
       }
     });
     weather = weatherResponse.data.current_weather.temperature + "°C" + ", Precipitation Probability: " + weatherResponse.data.hourly.precipitation_probability[0] + "%";
