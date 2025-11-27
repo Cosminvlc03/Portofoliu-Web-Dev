@@ -18,9 +18,9 @@
         <h1 class="mainTitle"> MyMovieTracker</h1>
         <div class="mainSection">
             <form id="loginForm" method="post">
-                <input type="text" id="usernameInput" name="username" placeholder="Username">
+                <input type="text" class="input" id="usernameInput" name="username" placeholder="Username">
                 <div class="removeSpace"> 
-                    <input type="password" id="passwordInput" name="password" placeholder="Password">
+                    <input type="password" class="input" id="passwordInput" name="password" placeholder="Password">
                     <input type="submit" id="forgottenPasswordButton" value="Forgot Password?" formaction="/forgotten">
                 </div>
                 <input type="submit" id="loginButton" value="Log in" formaction="/login">
@@ -28,7 +28,7 @@
             <div class="signSection">
                 <h3 class="newUser">New user?</h3>
                 <form id="signupForm" action="/signup" method="post">
-                    <input type="submit" id="signupButton" value="Sign up">
+                    <input type="submit" class="signUp" id="signupButton" value="Sign up">
                 </form>
             </div>  
         </div>

@@ -4,13 +4,13 @@ body{
     justify-content: space-between;
     align-items: center;
     margin: 0;
-    background: #020315;
+    background: #02182B;
 }
 
 .border{
     width: 200px;
     height: 100vh;
-    background: rgba(92, 0, 31, 0.80);
+    background: #D7263D;
     box-shadow: 0 4px 6px 5px rgba(0, 0, 0, 0.20) inset;
 }
 .center{
@@ -30,17 +30,19 @@ body{
     line-height: normal;
     backdrop-filter: blur(5px);
     margin: 0;
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
 }
 
 .mainSection{
     width: 450px;
     height: 550px;
     border-radius: 40px;
-    background: rgba(92, 0, 31, 0.80);
+    background:#D7263D;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
 }
 
 
@@ -53,7 +55,7 @@ body{
     justify-content: space-evenly;
 }
 
-#usernameInput{
+.input{
     width: 300px;
     height: 80px;
     border-radius: 40px;
@@ -67,14 +69,15 @@ body{
     font-weight: 400;
     line-height: normal;
     padding-left: 15px;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
 }
 
-#usernameInput:focus{
+.input:focus{
     background: rgba(195, 197, 215, 0.60);
     box-shadow: 0 0 8px rgba(195, 197, 215, 0.80);
 }
 
-#usernameInput:-webkit-autofill{
+.input:-webkit-autofill{
     box-shadow: 0 0 8px rgba(195, 197, 215, 0.60)!important;
     transition: background-color 9999s ease-in-out 0s;
     font-family: Alkatra;
@@ -90,38 +93,6 @@ body{
     align-items: center;
 }
 
-#passwordInput{
-    width: 300px;
-    height: 80px;
-    border-radius: 40px;
-    background: rgba(195, 197, 215, 0.80);
-    outline: none;
-    border: none;
-    color: rgba(0, 0, 0, 0.60);
-    font-family: Alkatra;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding-left: 15px;
-}
-
-#passwordInput:focus{
-    background: rgba(195, 197, 215, 0.60);
-    box-shadow: 0 0 8px rgba(195, 197, 215, 0.80);
-    
-}
-
-#passwordInput:-webkit-autofill{
-    box-shadow: 0 0 8px rgba(195, 197, 215, 0.60)!important;
-    transition: background-color 9999s ease-in-out 0s;
-    font-family: Alkatra;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
 #forgottenPasswordButton{
     color: #C3C5D7;
     font-family: Alkatra;
@@ -132,6 +103,7 @@ body{
     background: none;
     border: none;
     cursor: pointer;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
 }
 
 #forgottenPasswordButton:hover{
@@ -151,6 +123,7 @@ body{
     line-height: normal;
     border: none;
     cursor: pointer;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
 }
 
 #loginButton:hover{
@@ -161,7 +134,7 @@ body{
     width: 450px;
     height: 150px;
     border-radius: 40px;
-    background: rgba(92, 0, 31, 0.80);
+    background: #D7263D;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -175,9 +148,10 @@ body{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
 }
 
-#signupButton{
+.signUp{
     width: 150px;
     height: 50px;
     border-radius: 30px;
@@ -190,9 +164,10 @@ body{
     line-height: normal;
     border: none;
     cursor: pointer;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
 }
 
-#signupButton:hover{
+.signUp:hover{
     background:rgba(2, 3, 21, .6);
 }
 
@@ -203,4 +178,77 @@ body{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#saveProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 550px;
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+#fruitRemember{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.goLoginButton{
+    background: none;
+    outline: none;
+    border: none;
+    width: 90px;
+    height: 90px; 
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.goLoginButton:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #02182B50;
+}
+
+#forgottenProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 550px;
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.recoverPassword{
+    width: 250px;
+    height: 50px;
+    border-radius: 30px;
+    background: #020315;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.recoverPassword:hover{
+    background:rgba(2, 3, 21, .6);
 }

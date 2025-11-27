@@ -58,6 +58,51 @@ app.post("/signup", (req,res) => {
   res.render("signup.ejs")
 });
 
+app.post("/backLogin", (req,res) => {
+  res.render("login.ejs");
+});
+
+app.post("/save", async(req,res) => {
+  try{
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const fruit = req.body.fruit;
+    if((username.length > 0) && (email.length > 0) && (password.length > 0) && (fruit.length > 0)){
+      await db.query("INSERT INTO users (username , mail, password, fruit) VALUES (($1), ($2), ($3), ($4))",[username, email, password, fruit]);
+      console.log("Account Created Successfuly");
+      res.render("login.ejs");
+    } else {
+      console.log("Account creation failed");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/getPassword", async(req,res) =>{
+  try{
+    const email = req.body.email;
+    const fruit = req.body.fruit;
+    const result = await db.query("SELECT password FROM users WHERE fruit = ($1) AND mail = ($2)", [fruit, email]);
+    if (result.rows.length > 0){
+      const user = result.rows[0];
+      const userPassword = user.password;
+      console.log("Parola recuperata");
+      res.render("forgotten.ejs",{
+        verificationSuccess : true,
+        passwordToShow : userPassword,
+        });
+    } else{
+      res.render("forgotten.ejs",{
+        verificationSuccess : false,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Movie Tracker App listening at http://localhost:${port}`);
 });

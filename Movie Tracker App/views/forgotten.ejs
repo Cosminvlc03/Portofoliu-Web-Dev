@@ -20,13 +20,13 @@
     <div class="center">
         <h1 class="mainTitle">MyMovieTracker</h1>
         <div class="mainSection">
-            <form id="saveProfile" method="post" action="/save">
-                <input type="text" class="input" id="usernameInput" name="username" placeholder="Username" required>
+            <form id="forgottenProfile" method="post" action="/getPassword">
                 <input type="text" class="input" id="emailInput" name="email" placeholder="Email" required>
-                <input type="password" class="input" id="passwordInput" name="password" placeholder="Password" required>
                 <input type="text" class="input" id="fruitInput" name="fruit" placeholder="Favourite fruit" required>
-                <p id="fruitRemember">Remember this field in case of password recovery</p>
-                <input type="submit" class="signUp" id="signupButton" value="Sign up">
+                <% if (typeof verificationSuccess !== 'undefined' && verificationSuccess) { %>
+                    <input type="text" class="input" id="passwordInput" value="<%= passwordToShow %>" readonly>
+                <% } %>
+                <input type="submit" class="recoverPassword" id="recoverPasswordButton" value="Recover Password">
             </form>
         </div>
     </div>
