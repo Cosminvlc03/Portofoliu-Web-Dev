@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 const btn = document.getElementById('accountButtonID');
 const panel =document.getElementById('accountPanel');
-const closeHelp = document.getElementById('closePanel');
+const closeP = document.getElementById('closePanel');
 
 function togglePanel() {
   panel.classList.remove('hidden');
@@ -39,4 +39,31 @@ btn.addEventListener('click', () => {
     togglePanel();
   }
 });
-closeHelp.addEventListener('click', closePanel);
+closeP.addEventListener('click', closePanel);
+
+
+const btnLogout = document.getElementById('logoutPopUpButton');
+const panelLogout =document.getElementById('logoutPopUp');
+const closeLogout= document.getElementById('exitButton');
+
+function togglePanelLogout() {
+  panelLogout.classList.remove('hidden');
+  btnLogout.setAttribute('aria-expanded', 'true');
+  panelLogout.querySelector('exitButton').focus();
+}
+
+function closePanelLogout() {
+  panelLogout.classList.add('hidden');
+  btnLogout.setAttribute('aria-expanded', 'false');
+  btnLogout.focus();
+}
+
+btnLogout.addEventListener('click', () => {
+  const isOpen = btnLogout.getAttribute('aria-expanded') === 'true';
+  if (isOpen) {
+    closePanelLogout();
+  } else {
+    togglePanelLogout();
+  }
+});
+closeLogout.addEventListener('click', closePanelLogout);

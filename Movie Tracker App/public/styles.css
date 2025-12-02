@@ -386,6 +386,66 @@ body{
     border-radius: 30%;
 }
 
+#logoutPopUp{
+    position: fixed;
+    top: 30%;
+    width: 600px;
+    height: 300px;
+    border-radius: 30px;
+    background: #D7263D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    animation: drop 0.5s cubic-bezier(.22, .9, .26, 1) both;
+}
+
+.exitText{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+}
+
+#logoutPopUpIcons{
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#logoutButton{
+    width: 150px;
+    height: 80px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.60);
+    border: none;
+    outline: none;
+}
+
+#exitButton{
+    width: 150px;
+    height: 80px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.60);
+    border: none;
+    outline: none;
+}
+
+#logoutButton:hover{
+    cursor: pointer;
+    background-color: #02182B50;
+}
+
+#exitButton:hover{
+    cursor: pointer;
+    background-color: #02182B50;
+}
+
 @keyframes drop-left{
     0% {
         opacity: 0;
@@ -394,5 +454,16 @@ body{
     100% {
         opacity: 1;
         transform: translateY(0, 0, 0);
+    }
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
