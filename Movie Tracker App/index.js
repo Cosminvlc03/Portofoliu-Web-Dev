@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import dotenv from "dotenv";
 import pg from "pg";
+import session from "express-session";
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,18 @@ const port = 3000;
 dotenv.config();
 
 const apiKey = process.env.API_KEY;
+
+app.use(
+  session({
+    secret:process.env.SESSION_SECRET,
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+      secure:false,
+      maxAge:1000 * 60 * 60 * 24
+    }
+  })
+);
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -28,18 +41,27 @@ const db = new pg.Client({
 
 db.connect();
 
+function preventBrowserCache(req, res, next){
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  res.set('Expires', '0');
+  res.set('Pragma', 'no-cache');
+  next();
+}
+
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
 
-app.post("/login", async(req,res) =>{
+app.post("/login", preventBrowserCache, async(req,res) =>{
   try{
     const username = req.body.username;
     const password = req.body.password;
     const result = await db.query("SELECT * FROM users WHERE username = ($1) AND password = ($2)",[username,password]);
     let user = result.rows;
     if(user.length > 0){
-      res.render("home.ejs");
+      req.session.isAuthenticated = true;
+      req.session.username = user.username;
+      res.render("home.ejs",{ username : req.session.username});
       console.log("Login succesful")
     } else {
       console.log("Invalid username or password");
@@ -101,6 +123,25 @@ app.post("/getPassword", async(req,res) =>{
   } catch (err) {
     console.log(err);
   }
+});
+
+app.post("/account", (req, res) =>{
+  res.render("account.ejs");  
+});
+
+app.post("/about", (req, res) => {
+  res.render("about.ejs");
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if(err){
+      console.log("Eroarea la distrugerea sesiunii:", err);
+    } else {
+      console.log("Delogare reusita. Sesiune distrusa");
+      res.render("login.ejs");
+    }
+  });
 });
 
 app.listen(port, () => {

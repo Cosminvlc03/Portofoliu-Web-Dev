@@ -14,3 +14,29 @@ document.addEventListener("DOMContentLoaded", () =>{
         }
     });
 });
+
+const btn = document.getElementById('accountButtonID');
+const panel =document.getElementById('accountPanel');
+const closeHelp = document.getElementById('closePanel');
+
+function togglePanel() {
+  panel.classList.remove('hidden');
+  btn.setAttribute('aria-expanded', 'true');
+  panel.querySelector('closePanel').focus();
+}
+
+function closePanel() {
+  panel.classList.add('hidden');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.focus();
+}
+
+btn.addEventListener('click', () => {
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  if (isOpen) {
+    closePanel();
+  } else {
+    togglePanel();
+  }
+});
+closeHelp.addEventListener('click', closePanel);
