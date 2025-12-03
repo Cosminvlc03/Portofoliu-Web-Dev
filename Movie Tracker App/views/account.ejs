@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapi s.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Account</title>
+</head>
+<body>
+    <div class="border"></div>
+    <div class="center">
+        <h1 class="mainTitle">MyMovieTracker</h1>
+        <div class="mainSectionAccount">
+            <h2 id="accountTitle">Account details</h2>
+            <p class="accountDetails">Username</p>
+            <p class="inputAccount"> <%= username %> </p>
+            <p class="accountDetails">E-mail</p>
+            <p class="inputAccount"> <%= mail %> </p>
+            <p class="accountDetails">Favourite fruit</p>
+            <p class="inputAccount"> <%= fruit %> </p>
+            <form id="goBackFromAccountForm" method="post" action="/goBackFromAccount">
+                <button type="submit" id="goBackFromAccountButton">
+                    <img src="../misc/Icon (2).svg" alt="home" id="homeIcon">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="border"></div>
+
+</body>
+<script src="/script.js"></script>
+</html>

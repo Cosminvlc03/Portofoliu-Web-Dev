@@ -10,7 +10,9 @@ body{
 .border{
     width: 200px;
     height: 100vh;
-    background: #D7263D;
+    background: linear-gradient(90deg, #D7263D, #5C001FCC, #D7263D);
+    background-size: 400% 400%;
+    animation: flowing-gradient 15s ease infinite;
     box-shadow: 0 4px 6px 5px rgba(0, 0, 0, 0.20) inset;
 }
 .center{
@@ -34,15 +36,17 @@ body{
 }
 
 .mainSection{
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
     width: 450px;
     height: 550px;
     border-radius: 40px;
-    background:#D7263D;
+    background: linear-gradient(90deg, #D7263D, #5C001FCC, #D7263D);
+    background-size: 400% 400%;
+    animation: flowing-gradient 15s ease infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
 }
 
 
@@ -134,7 +138,9 @@ body{
     width: 450px;
     height: 150px;
     border-radius: 40px;
-    background: #D7263D;
+    background: linear-gradient(90deg, #D7263D, #5C001FCC, #D7263D);
+    background-size: 400% 400%;
+    animation: flowing-gradient 15s ease infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -178,17 +184,6 @@ body{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-}
-
-@keyframes drop {
-    0% {
-        opacity: 0;
-        transform: translateY(-40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 #saveProfile{
@@ -263,7 +258,9 @@ body{
 .homeBorder{
     width: 100%;
     height: 180px;
-    background: #D7263D;
+    background: linear-gradient(90deg, #D7263D, #5C001FCC, #D7263D);
+    background-size: 400% 400%;
+    animation: flowing-gradient 15s ease infinite;
     box-shadow: 0 4px 6px 5px rgba(0, 0, 0, 0.20) inset;
 }
 
@@ -446,6 +443,149 @@ body{
     background-color: #02182B50;
 }
 
+.mainSectionAccount{
+    animation: drop .6s cubic-bezier(.22, .9, .26, 1) both;
+    width: 450px;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #D7263D, #5C001FCC, #D7263D);
+    background-size: 400% 400%;
+    animation: flowing-gradient 15s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputAccount{
+    width: 300px;
+    height: 50px;
+    flex-grow: 1;
+    border-radius: 20px;
+    background: rgba(195, 197, 215, 0.80);
+    color: #020315;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    animation: drop 1s cubic-bezier(.22, .9, .26, 1) both;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+#accountTitle{
+    color: #C3C5D7;
+    text-align: center;
+    font-family: Alkatra;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+    margin-top: 25px;
+    margin-bottom: 25;
+}
+
+.accountDetails{
+    align-self: flex-start;
+    padding-left: 75px;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#goBackFromAccountButton{
+    background: none;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#goBackFromAccountButton:hover{
+    cursor: pointer;    
+    background-color: #02182B50;
+    border-radius:10px;
+}
+
+
+.aboutTitle{
+    color: #C3C5D7;
+    text-align: center;
+    font-family: Alkatra;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+}
+
+.mainSectionAbout{
+    width: 900px;
+    border-radius: 40px;
+    background: rgba(195, 197, 215, 0.05);
+}
+
+.aboutDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.aboutH3{
+    color: #C3C5D7;
+    text-align: center;
+    font-family: Alkatra;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+    margin: 0%;
+}
+
+.aboutP{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    backdrop-filter: blur(5px);
+    margin: 0%;
+}
+
+#aboutBorderLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+}
+
+#aboutBorderRight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+}
+
+#apiLogo{
+    background: none;
+    margin-top: 20px;
+}
+
+#homeIcon{
+    padding-top: 10px;
+}
+
 @keyframes drop-left{
     0% {
         opacity: 0;
@@ -465,5 +605,17 @@ body{
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes flowing-gradient{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
     }
 }

@@ -51,18 +51,22 @@ function preventBrowserCache(req, res, next){
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
+  
+let username;
+let password;
+let user;
 
 app.post("/login", preventBrowserCache, async(req,res) =>{
   try{
-    const username = req.body.username;
-    const password = req.body.password;
-    const result = await db.query("SELECT * FROM users WHERE username = ($1) AND password = ($2)",[username,password]);
-    let user = result.rows;
+    username = req.body.username;
+    password = req.body.password;
+    let result = await db.query("SELECT * FROM users WHERE username = ($1) AND password = ($2)",[username,password]);
+    user = result.rows;
     if(user.length > 0){
       req.session.isAuthenticated = true;
       req.session.username = user.username;
-      res.render("home.ejs",{ username : req.session.username});
-      console.log("Login succesful")
+      res.render("home.ejs",{ username : username});
+      console.log("Login succesful");
     } else {
       console.log("Invalid username or password");
       res.render("login.ejs", { error: "Invalid username or password"});
@@ -125,8 +129,16 @@ app.post("/getPassword", async(req,res) =>{
   }
 });
 
-app.post("/account", (req, res) =>{
-  res.render("account.ejs");  
+app.post("/account", async (req, res) =>{
+  console.log(username);  
+  console.log(password);  
+  const result = await db.query("SELECT mail, fruit FROM users WHERE username = ($1) AND password = ($2)",[username, password]);
+  let items = result.rows[0];
+  res.render("account.ejs",{
+    username : username,
+    mail : items.mail,
+    fruit : items.fruit
+  });
 });
 
 app.post("/about", (req, res) => {
@@ -142,6 +154,14 @@ app.post("/logout", (req, res) => {
       res.render("login.ejs");
     }
   });
+});
+
+app.post("/goBackFromAccount", (req, res) =>{
+  res.render("home.ejs", { username : username});
+});
+
+app.post("/goBackFromAbout", (req, res) =>{
+  res.render("home.ejs", { username : username});
 });
 
 app.listen(port, () => {
