@@ -11,7 +11,7 @@ const port = 3000;
 dotenv.config();
 
 const apiKey = process.env.API_KEY;
-
+const baseURL = 'https://api.themoviedb.org/3';
 app.use(
   session({
     secret:process.env.SESSION_SECRET,
@@ -41,6 +41,10 @@ const db = new pg.Client({
 
 db.connect();
 
+let username;
+let password;
+let user;
+
 function preventBrowserCache(req, res, next){
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   res.set('Expires', '0');
@@ -48,13 +52,57 @@ function preventBrowserCache(req, res, next){
   next();
 }
 
+async function getMovieDetails(mediaId, mediaType = 'movie'){
+  try{
+    const detailsUrl = `${baseURL}/${mediaType}/${mediaId}?api_key=${apiKey}&append_to_response=credits`;
+    const respone = await axios.get(detailsUrl);
+    const data = respone.data;
+    const mainActors = data.credits.cast.sort((a, b) => b.popularity - a.popularity).slice(0, 5).map(actor => actor.name);
+    const releaseDate = data.release_date || data.first_air_date;
+    const releaseYear = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
+    return {
+      title: data.title || data.name,
+      releaseYear: releaseYear,
+      type: data.media_type || mediaType,
+      photo: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path.trim()}` : null,
+      description: data.overview,
+      mainActors: mainActors
+    };
+  } catch(err){
+    console.log(`Error fetching details for ID ${mediaId}`,err);
+  }
+}
+
+async function searchAndGetDetails(query){
+  console.log(`Searching for ${query}`);
+  const maxResults = 4;
+  try{
+    const searchUrl = `${baseURL}/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+    const respone = await axios.get(searchUrl);
+    const searchResults = respone.data.results;
+    if(!searchResults || searchResults.length === 0){
+      console.log('No results found');
+      return null;
+    }
+    const mediaToFetch = searchResults.filter(result => result.media_type !== 'person').slice(0, maxResults);
+
+    const selectedMedia = mediaToFetch.map(result => {
+      const mediaId = result.id;
+      const mediaType = result.media_type;
+      return getMovieDetails(mediaId, mediaType);
+    });
+    let detailedResults = await Promise.all(selectedMedia);
+    detailedResults = detailedResults.filter(detail => detail !== null);
+    return detailedResults;
+  } catch(err){
+    console.log(err);
+    return null;
+  }
+}
+
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
-  
-let username;
-let password;
-let user;
 
 app.post("/login", preventBrowserCache, async(req,res) =>{
   try{
@@ -67,6 +115,7 @@ app.post("/login", preventBrowserCache, async(req,res) =>{
       req.session.username = user.username;
       res.render("home.ejs",{ username : username});
       console.log("Login succesful");
+      console.log(user);
     } else {
       console.log("Invalid username or password");
       res.render("login.ejs", { error: "Invalid username or password"});
@@ -162,6 +211,30 @@ app.post("/goBackFromAccount", (req, res) =>{
 
 app.post("/goBackFromAbout", (req, res) =>{
   res.render("home.ejs", { username : username});
+});
+
+app.post("/goBackFromSearch", (req, res) => {
+  res.render("home.ejs",{ username : username});
+});
+
+app.post("/searchMedia", async(req, res) =>{
+  try{
+    let title = req.body["search"];
+    let details = await searchAndGetDetails(title);
+    console.log(details);
+    const media = (details || []).map(item => ({
+      title: item.title,
+      image: (item.photo && item.photo.trim() !== '') ? item.photo.trim() : null
+    }));
+    res.render("search.ejs",{ media : media});
+    media.length = 0;
+  } catch(err){
+    console.log(err);
+  }
+});
+
+app.post("/mediaDetails", (req, res) =>{
+  res.render("media.ejs");
 });
 
 app.listen(port, () => {
