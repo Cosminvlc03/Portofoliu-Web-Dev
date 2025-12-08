@@ -248,6 +248,10 @@ body{
     background:rgba(2, 3, 21, .6);
 }
 
+#searchBody, #mediaBody{
+    position: absolute;
+}
+
 .homeBody{
     display: flex;
     flex-direction: column;
@@ -291,7 +295,6 @@ body{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    backdrop-filter: blur(5px);
     padding-left: 200px;
     text-align: center;
 }
@@ -676,6 +679,129 @@ body{
 #searchTitle{
     margin-left: 200px;
 }
+
+.middleSection{
+    width: 1200px;
+    height: 500px;
+    background: rgba(195, 197, 215, 0.05);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px 20px 10px 20px;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+
+#title{
+    grid-area: 1 / 1 / 2 / 7;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /*width: 600px;
+    height: 50px;*/
+}
+
+#titleText{
+    padding-left: 220px;
+}
+
+#year{
+    grid-area: 1 / 7 / 2 / 8;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*width: 100px;
+    height: 50px;*/
+}
+#type{
+    grid-area: 1 / 8 / 2 / 12;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*width: 460px;
+    height: 50px;*/
+}
+#photo{
+    grid-area: 2 / 1 / 8 / 4;
+    background: #D9D9D9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*width: 260px;
+    height: 300px;*/
+}
+#description{
+    grid-area: 2 / 4 / 8 / 12;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    /*width: 900px;
+    height: 300px;*/
+}
+#actors{
+    grid-area: 8 / 1 / 9 / 12;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    /*width: 1220px;
+    height: 50px;*/
+}
+
+#mediaPhoto{
+    width: 300px;
+    height: 350px;
+}
+
+#favouriteButton{
+    background: none;
+    outline: none;
+    border: none;
+}
+
+#favouriteButton:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #02182B50;
+}
+
+
 
 @keyframes drop-left{
     0% {

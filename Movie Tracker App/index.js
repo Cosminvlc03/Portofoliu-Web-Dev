@@ -63,7 +63,7 @@ async function getMovieDetails(mediaId, mediaType = 'movie'){
     return {
       title: data.title || data.name,
       releaseYear: releaseYear,
-      type: data.media_type || mediaType,
+      genres: data.genres.map(genre => genre.name) || [],
       photo: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path.trim()}` : null,
       description: data.overview,
       mainActors: mainActors
@@ -73,9 +73,9 @@ async function getMovieDetails(mediaId, mediaType = 'movie'){
   }
 }
 
-async function searchAndGetDetails(query){
+async function searchAndGetDetails(query, noOfResults){
   console.log(`Searching for ${query}`);
-  const maxResults = 4;
+  const maxResults = noOfResults;
   try{
     const searchUrl = `${baseURL}/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
     const respone = await axios.get(searchUrl);
@@ -145,6 +145,7 @@ app.post("/save", async(req,res) => {
     const fruit = req.body.fruit;
     if((username.length > 0) && (email.length > 0) && (password.length > 0) && (fruit.length > 0)){
       await db.query("INSERT INTO users (username , mail, password, fruit) VALUES (($1), ($2), ($3), ($4))",[username, email, password, fruit]);
+      await db.query("INSERT INTO watchlist (user_id) VALUES ((SELECT id FROM users WHERE mail = ($1) AND password = ($2)))",[email, password]);
       console.log("Account Created Successfuly");
       res.render("login.ejs");
     } else {
@@ -220,7 +221,7 @@ app.post("/goBackFromSearch", (req, res) => {
 app.post("/searchMedia", async(req, res) =>{
   try{
     let title = req.body["search"];
-    let details = await searchAndGetDetails(title);
+    let details = await searchAndGetDetails(title, 4);
     console.log(details);
     const media = (details || []).map(item => ({
       title: item.title,
@@ -233,8 +234,22 @@ app.post("/searchMedia", async(req, res) =>{
   }
 });
 
-app.post("/mediaDetails", (req, res) =>{
-  res.render("media.ejs");
+app.post("/mediaDetails", async(req, res) =>{
+  try{
+    let mediaTitle = req.body["mediaTitle"];
+    let detailsArray = await searchAndGetDetails(mediaTitle, 1);
+    let details = detailsArray[0];
+    console.log(details);
+    let title = details.title;
+    let year = details.releaseYear;
+    let type = details.genres.join(', ');
+    let photo = details.photo;
+    let description = details.description;
+    let actors = details.mainActors;
+    res.render("media.ejs", { title: title, year: year, type: type, photo: photo, description: description, actors: actors });
+  } catch(err){
+    console.log(err);
+  }
 });
 
 app.listen(port, () => {

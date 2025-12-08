@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <title>Home</title>
 </head>
-<body class="homeBody">
+<body class="homeBody" id="searchBody">
     <div id="logoutPopUp" class="hidden">
         <h3 class="exitText">Are you sure you want to log out?</h3>
         <div id="logoutPopUpIcons">
@@ -24,17 +24,17 @@
         </div>
     </div>
     <div id="accountPanel" class="hidden">
-            <button type="button" id="closePanel">
-                <img src="../misc/arrow_back.svg" alt="arrow_back" id="backArrow">
-            </button>
-            <form id="accountForm" method="post" action="/account">
-                <input type="submit" value="Account" class="accountSubmit">
-            </form>
-            <form id="aboutForm" method="post" action="/about">
-                <input type="submit" value="About" class="accountSubmit">
-            </form>
-            <button type="button" id="logoutPopUpButton" class="accountSubmit">Log Out</button>
-        </div>
+        <button type="button" id="closePanel">
+            <img src="../misc/arrow_back.svg" alt="arrow_back" id="backArrow">
+        </button>
+        <form id="accountForm" method="post" action="/account">
+            <input type="submit" value="Account" class="accountSubmit">
+        </form>
+        <form id="aboutForm" method="post" action="/about">
+            <input type="submit" value="About" class="accountSubmit">
+        </form>
+        <button type="button" id="logoutPopUpButton" class="accountSubmit">Log Out</button>
+    </div>
     <div class="homeBorder" id="upperHomeBorder">
         <button type="button" class="accountButton" id="accountButtonID">
             <img src="../misc/account_circle.svg" alt="account_button" id="accountIcon">
