@@ -653,6 +653,13 @@ body{
     background-color: #02182B50;
 }
 
+#mediaTitleForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #shownMediaPhoto{
     margin-top: 20px;
     width: 220px;

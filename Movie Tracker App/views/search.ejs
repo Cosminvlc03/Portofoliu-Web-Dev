@@ -53,10 +53,11 @@
         <h2 class="searchTitle">Is this what you are looking for?</h2>
         <% if(media.length > 0) {%>
             <% media.forEach(function(movies){ %>
-                <% const mediaImage = movies.image  || '../misc/Film.svg'; %>
                 <div class="mediaContainer">
-                    <img src="<%= mediaImage %>" id="shownMediaPhoto">
                     <form id="mediaTitleForm" method="post" action="/mediaDetails">
+                        <input type="hidden" name="mediaId" value=" <%= movies.id %>" >
+                        <% const mediaImage = movies.image  || '../misc/Film.svg'; %>
+                        <img src="<%= mediaImage %>" id="shownMediaPhoto">
                         <input type="submit" name="mediaTitle" id="shownMediaTitle" value="<%= movies.title %>">
                     </form>
                 </div>

@@ -13,7 +13,7 @@ CREATE TABLE media(
 	poster_path VARCHAR(300),
 	release_year INTEGER,
 	description TEXT NOT NULL,
-	media_type VARCHAR(30),
+	media_type VARCHAR(100),
 	actors VARCHAR(300),
 	user_rating INTEGER
 );

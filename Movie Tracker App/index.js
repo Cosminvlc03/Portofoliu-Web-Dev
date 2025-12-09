@@ -61,6 +61,7 @@ async function getMovieDetails(mediaId, mediaType = 'movie'){
     const releaseDate = data.release_date || data.first_air_date;
     const releaseYear = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
     return {
+      id: mediaId,
       title: data.title || data.name,
       releaseYear: releaseYear,
       genres: data.genres.map(genre => genre.name) || [],
@@ -84,7 +85,7 @@ async function searchAndGetDetails(query, noOfResults){
       console.log('No results found');
       return null;
     }
-    const mediaToFetch = searchResults.filter(result => result.media_type !== 'person').slice(0, maxResults);
+    const mediaToFetch = searchResults.filter(result => result.media_type === 'movie' ).sort((a, b) => b.popularity - a.popularity).slice(0, maxResults);
 
     const selectedMedia = mediaToFetch.map(result => {
       const mediaId = result.id;
@@ -145,7 +146,6 @@ app.post("/save", async(req,res) => {
     const fruit = req.body.fruit;
     if((username.length > 0) && (email.length > 0) && (password.length > 0) && (fruit.length > 0)){
       await db.query("INSERT INTO users (username , mail, password, fruit) VALUES (($1), ($2), ($3), ($4))",[username, email, password, fruit]);
-      await db.query("INSERT INTO watchlist (user_id) VALUES ((SELECT id FROM users WHERE mail = ($1) AND password = ($2)))",[email, password]);
       console.log("Account Created Successfuly");
       res.render("login.ejs");
     } else {
@@ -225,7 +225,8 @@ app.post("/searchMedia", async(req, res) =>{
     console.log(details);
     const media = (details || []).map(item => ({
       title: item.title,
-      image: (item.photo && item.photo.trim() !== '') ? item.photo.trim() : null
+      image: (item.photo && item.photo.trim() !== '') ? item.photo.trim() : null,
+      id: item.id
     }));
     res.render("search.ejs",{ media : media});
     media.length = 0;
@@ -237,17 +238,35 @@ app.post("/searchMedia", async(req, res) =>{
 app.post("/mediaDetails", async(req, res) =>{
   try{
     let mediaTitle = req.body["mediaTitle"];
-    let detailsArray = await searchAndGetDetails(mediaTitle, 1);
-    let details = detailsArray[0];
+    let mediaId = req.body["mediaId"];
+    let details = await getMovieDetails(mediaId, 'movie');
     console.log(details);
-    let title = details.title;
+    let title = mediaTitle;
     let year = details.releaseYear;
     let type = details.genres.join(', ');
     let photo = details.photo;
     let description = details.description;
     let actors = details.mainActors;
-    res.render("media.ejs", { title: title, year: year, type: type, photo: photo, description: description, actors: actors });
+    res.render("media.ejs", { title: title, year: year, type: type, photo: photo, description: description, actors: actors, mediaId: mediaId });
   } catch(err){
+    console.log(err);
+  }
+});
+
+app.post("/favourite", async(req, res) =>{
+  let tmdbId = req.body["mediaId"];
+  let title = req.body["title"];
+  let year = req.body["year"];
+  let type = req.body["type"];
+  let photo = req.body["photo"];
+  let description = req.body["description"];
+  let actors = req.body["actors"];
+  try{
+    await db.query("INSERT INTO media (tmdb_id, title, release_year, media_type, poster_path, description, actors) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT(tmdb_id) DO UPDATE SET title = EXCLUDED.title RETURNING id", [tmdbId, title, year, type, photo, description, actors]);
+    await db.query("INSERT INTO watchlist (user_id, movie_id) VALUES ((SELECT id FROM users WHERE username = ($1) AND password = ($2)), (SELECT id FROM media WHERE tmdb_id = ($3)))",[username, password, tmdbId]);
+    console.log("Movie added to watchlist");
+    res.render("home.ejs",{ username : username});
+  } catch(err) {
     console.log(err);
   }
 });
