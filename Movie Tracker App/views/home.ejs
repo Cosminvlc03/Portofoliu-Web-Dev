@@ -45,7 +45,22 @@
         </form>
     </div>
     <h2 class="homeText">What movies do you wish to look for today, <%= username %>?</h2>
-    <div class="movieBox"></div>
+    <div class="movieBox">
+        <% if (typeof watchlist !== 'undefined' && watchlist.length > 0 ) { %>
+            <% watchlist.forEach(item => { %>
+                <div class="movieItem">
+                    <form method="post" action="/homeMediaDetails" id="homeMediaTitleForm">
+                        <input type="hidden" name="tmdb_id" value="<%= item.tmdb_id %>">
+                        <input type="hidden" name="title" value="<%= item.title %>">
+                        <img src="https://image.tmdb.org/t/p/w200<%= item.poster_path %>" alt="<%= item.title %> Poster" id="moviePoster">
+                        <input type="submit" name="mediaTitle" id="homeMovieTitle" value="<%= item.title %>">
+                    </form>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p id ="noMovies">No movies in your watchlist.</p>
+        <% } %> 
+    </div>
     <div class="homeBorder"></div>
 </body>
 <script src="/script.js"></script>

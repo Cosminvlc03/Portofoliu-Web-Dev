@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <title>Home</title>
+    </head>
+    <body class="homeBody">
+        <div class="homeBorder" id="upperHomeBorder">
+            <form id="goBackFromFavouritesForm" method="post" action="/goBackFromSearch">
+                <button type="submit" id="goBackFromFavouritesButton">
+                    <img src="../misc/arrow_back.svg" alt="home" id="homeIcon">
+                </button>
+            </form>
+            <h1 id="favouriteTitle">MyMovieTracker</h1>
+            <form method="post" action="/removeFromFavourites" id="removeFromFavouritesForm">
+                <input type="hidden" name="tmdb_id" value="<%= tmdb_id %>">
+                <input type="submit" value="Remove" id="removeFromFavouritesButton">
+            </form>
+        </div>
+        <div class="middleSection">
+            <div id="titleFromFavs"> <%= title %> </div>
+            <div id="year"><%= year %></div>
+            <div id="type">Type: <%= type %></div>
+            <div id="photo"><img src="<%= photo %>" alt="<%= title %>" id="mediaPhoto"></div>
+            <div id="description"> <%= description %></div>
+            <div id="actors"> <%= actors %></div>
+        </div>
+        <div class="homeBorder"></div>
+    </body>
+    <script src="/script.js"></script>
+</html>

@@ -334,6 +334,10 @@ body{
     height: 400px;
     background: rgba(195, 197, 215, 0.05);
     margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 #accountPanel{
@@ -808,7 +812,129 @@ body{
     background-color: #02182B50;
 }
 
+.movieItem{
+    width: 260px;
+    min-height: 300px;
+    height: max-content;
+    background: #D9D9D9;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
+#homeMediaTitleForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#moviePoster{
+    margin-top: 20px;
+    width: 220px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.60);
+}
+
+#homeMovieTitle{
+    text-align: center;
+    padding-top: 10px;
+    width: 220px;
+    min-height: 40px;
+    height: max-content;
+    white-space: normal;
+    background: rgba(0, 0, 0, 0.30);
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#homeMovieTitle:hover{
+    cursor: pointer;    
+    background-color: #02182B50;
+}
+
+#noMovies{
+    width: 1200px;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 350px;
+}
+
+#titleFromFavs{
+    grid-area: 1 / 1 / 2 / 7;
+    background: #D9D9D9;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Alkatra;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#removeFromFavouritesButton{
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background: #020315;
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    outline: none;
+    border: none;
+    margin-right: 100px;
+}
+
+#removeFromFavouritesButton:hover{
+    cursor: pointer;
+    background: #02182B70;
+}
+
+#goBackFromFavouritesButton{
+    background: none;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#goBackFromFavouritesButton:hover{
+    cursor: pointer;    
+    background-color: #02182B50;
+    border-radius:10px
+}
+
+#favouriteTitle{
+    color: #C3C5D7;
+    font-family: Alkatra;
+    font-size: 68px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 
 @keyframes drop-left{
     0% {

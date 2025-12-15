@@ -101,6 +101,8 @@ async function searchAndGetDetails(query, noOfResults){
   }
 }
 
+const userMovies= 'SELECT m.tmdb_id, m.title, m.release_year, m.media_type, m.poster_path, m.description, m.actors FROM media m JOIN watchlist w ON m.id = w.movie_id JOIN users u ON w.user_id = u.id WHERE u.username = ($1) AND u.password = ($2)';
+
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
@@ -113,8 +115,11 @@ app.post("/login", preventBrowserCache, async(req,res) =>{
     user = result.rows;
     if(user.length > 0){
       req.session.isAuthenticated = true;
-      req.session.username = user.username;
-      res.render("home.ejs",{ username : username});
+      req.session.username = user[0].username;
+      const watchlistResult = await db.query(userMovies, [username, password]);   
+      let watchlistItems = watchlistResult.rows;
+      console.log(watchlistItems);
+      res.render("home.ejs",{ username : username, watchlist: watchlistItems});
       console.log("Login succesful");
       console.log(user);
     } else {
@@ -206,16 +211,25 @@ app.post("/logout", (req, res) => {
   });
 });
 
-app.post("/goBackFromAccount", (req, res) =>{
-  res.render("home.ejs", { username : username});
+app.post("/goBackFromAccount", async (req, res) =>{
+  const watchlistResult = await db.query(userMovies, [username, password]);   
+  let watchlistItems = watchlistResult.rows;
+  console.log(watchlistItems);
+  res.render("home.ejs",{ username : username, watchlist: watchlistItems});
 });
 
-app.post("/goBackFromAbout", (req, res) =>{
-  res.render("home.ejs", { username : username});
+app.post("/goBackFromAbout", async(req, res) =>{
+  const watchlistResult = await db.query(userMovies, [username, password]);   
+  let watchlistItems = watchlistResult.rows;
+  console.log(watchlistItems);
+  res.render("home.ejs",{ username : username, watchlist: watchlistItems});
 });
 
-app.post("/goBackFromSearch", (req, res) => {
-  res.render("home.ejs",{ username : username});
+app.post("/goBackFromSearch", async (req, res) => {
+  const watchlistResult = await db.query(userMovies, [username, password]);   
+  let watchlistItems = watchlistResult.rows;
+  console.log(watchlistItems);
+  res.render("home.ejs",{ username : username, watchlist: watchlistItems});
 });
 
 app.post("/searchMedia", async(req, res) =>{
@@ -265,8 +279,43 @@ app.post("/favourite", async(req, res) =>{
     await db.query("INSERT INTO media (tmdb_id, title, release_year, media_type, poster_path, description, actors) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT(tmdb_id) DO UPDATE SET title = EXCLUDED.title RETURNING id", [tmdbId, title, year, type, photo, description, actors]);
     await db.query("INSERT INTO watchlist (user_id, movie_id) VALUES ((SELECT id FROM users WHERE username = ($1) AND password = ($2)), (SELECT id FROM media WHERE tmdb_id = ($3)))",[username, password, tmdbId]);
     console.log("Movie added to watchlist");
-    res.render("home.ejs",{ username : username});
+    const watchlistResult = await db.query(userMovies, [username, password]);   
+    let watchlistItems = watchlistResult.rows;
+    console.log(watchlistItems);
+    res.render("home.ejs",{ username : username, watchlist: watchlistItems});
   } catch(err) {
+    console.log(err);
+  }
+});
+
+app.post("/homeMediaDetails", async(req, res) =>{
+  try{
+    let title = req.body["title"];
+    let tmdbId = req.body["tmdb_id"];
+    const watchlistResult = await db.query("SELECT * FROM media WHERE tmdb_id = ($1)", [tmdbId]);
+    const result = watchlistResult.rows[0];
+    const year = result.release_year;
+    const type = result.media_type;
+    const photo = result.poster_path;
+    const description = result.description;
+    const actors = result.actors;
+    const id = result.id;
+    res.render("homeMedia.ejs", { title: title, year: year, type: type, photo: photo, description: description, actors: actors, mediaId: id, tmdb_id: tmdbId });
+  } catch (err){
+    console.log(err);
+  }
+});
+
+app.post("/removeFromFavourites", async(req, res) => {
+  try{
+    let tmdbId = req.body["tmdb_id"];
+    await db.query("DELETE FROM watchlist WHERE user_id = (SELECT id FROM users WHERE username = ($1) AND password = ($2)) AND movie_id = (SELECT id FROM media WHERE tmdb_id = ($3))",[username, password, tmdbId]);
+    console.log("Movie removed from watchlist");
+    const watchlistResult = await db.query(userMovies, [username, password]);   
+    let watchlistItems = watchlistResult.rows;
+    console.log(watchlistItems);
+    res.render("home.ejs",{ username : username, watchlist: watchlistItems});
+  } catch(err){
     console.log(err);
   }
 });
